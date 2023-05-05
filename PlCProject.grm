@@ -1,0 +1,85 @@
+"Start Symbol" = <program>
+               
+!----------Terminal-----------
+
+
+Id= [_]{letter}{Alphanumeric}* 
+Digit = ('+'|'-'){digit}*('.'{digit}+)?('e'|('-'|'+'){digit} + '^' ('+'|'-'){digit}+ ('.'{letter}+)? )?
+      
+
+!-----------Rules------------  
+<program> ::= <statement_list>
+           
+
+<statement_list> ::= <statement> 
+                  | <statement> <statement_list>
+
+<statement> ::= <variable_declaration> 
+             | <if_statement> 
+             | <while_loop> 
+             | <for_loop> 
+             | <switch_statement> 
+             | <do_while_loop>  
+             | <expression> ';'
+
+<variable_declaration> ::= 'var' <identifier> '=' <expression> ';'
+
+<if_statement> ::= 'if' '(' <expression> ')' <statement>  'else' <statement> 
+
+<while_loop> ::= 'while' '(' <expression> ')' <statement>
+
+<for_loop> ::= 'for' '(' <for_initializer> ';' <expression> ';' <expression> ')' <statement>
+
+<for_initializer> ::= <variable_declaration> 
+                   | <expression> ';'
+                   
+<expression> ::= <literal> 
+              | <identifier> 
+              | <binary_expression> 
+              | <unary_expression> 
+              | <function_call>
+
+
+<switch_statement> ::= 'switch' '(' <expression> ')' '{' <case_list> '}'
+
+<case_list> ::= <case_clause> 
+             | <case_clause> <case_list>
+
+<case_clause> ::= 'case' <literal> ':' <statement_list> 'break' ';'
+               
+<do_while_loop> ::= 'do' <statement> 'while' '(' <expression> ')' ';'
+
+<literal> ::= <number_literal>  
+           | <boolean_literal>
+
+<number_literal> ::= Digit
+
+<boolean_literal> ::= 'true' 
+                   | 'false'
+
+<binary_expression> ::= <expression> <binary_operator> <expression>
+
+<binary_operator> ::= '+' 
+                   | '-' 
+                   | '*' 
+                   | '/' 
+                   | '%' 
+                   |'==' 
+                   | '!=' 
+                   | '<' 
+                   | '>' 
+                   | '<=' 
+                   | '>='
+
+<unary_expression> ::= <unary_operator> <expression>
+
+<unary_operator> ::= '-' 
+                  | '!'
+
+<function_call> ::= <identifier> '('  <expression_list>  ')'
+
+<expression_list> ::= <expression> 
+                   | <expression> ',' <expression_list>
+
+<identifier> ::= Id
+
